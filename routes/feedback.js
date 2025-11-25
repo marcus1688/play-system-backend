@@ -150,7 +150,6 @@ router.get(
         }
         const lastMessage =
           feedback.conversation[feedback.conversation.length - 1];
-        console.log(lastMessage);
         return lastMessage.sender !== "agent";
       });
       res.json({ success: true, count: truePendingFeedbacks.length });
