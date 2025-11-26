@@ -48,6 +48,14 @@ const generalSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    userIdStart: {
+      type: Number,
+      default: 10000,
+    },
+    userIdCounter: {
+      type: Number,
+      default: 10000,
+    },
   },
   {
     timestamps: {

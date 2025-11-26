@@ -334,6 +334,7 @@ router.post(
         maxDeposit,
         minWithdraw,
         maxWithdraw,
+        userIdStart,
       } = req.body;
       let uploadedFiles = {
         logoimage: null,
@@ -450,6 +451,8 @@ router.post(
         maxDeposit: maxDeposit || 0,
         minWithdraw: minWithdraw || 0,
         maxWithdraw: maxWithdraw || 0,
+        userIdStart: userIdStart || 10000,
+        userIdCounter: userIdStart || 10000,
       });
       const savedData = await generalSetting.save();
       res.status(200).json({
@@ -533,6 +536,7 @@ router.put(
         maxDeposit,
         minWithdraw,
         maxWithdraw,
+        userIdStart,
       } = req.body;
       const generalUpdate = await general.findById(req.params.id);
       if (!generalUpdate) {
@@ -571,6 +575,15 @@ router.put(
         minWithdraw: minWithdraw !== undefined ? minWithdraw : 0,
         maxWithdraw: maxWithdraw !== undefined ? maxWithdraw : 0,
       };
+
+      if (userIdStart !== undefined) {
+        const newStart = parseInt(userIdStart);
+        const currentCounter = generalUpdate.userIdCounter || 0;
+        updates.userIdStart = newStart;
+        if (newStart > currentCounter) {
+          updates.userIdCounter = newStart;
+        }
+      }
       if (req.files.logoimage && req.files.logoimage[0]) {
         if (generalUpdate.logoimage) {
           await smartDeleteFile(generalUpdate.logoimage, req.companyId);
