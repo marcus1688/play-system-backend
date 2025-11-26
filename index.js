@@ -50,8 +50,6 @@ const RebateScheduleRouter = require("./routes/rebateschedule");
 const AgentRouter = require("./routes/agent");
 const AgentLevelSystemRouter = require("./routes/agentlevelsystem");
 const CheckInRouter = require("./routes/checkin");
-const smsRouter = require("./routes/sms");
-const emailRouter = require("./routes/email");
 const LuckySpinSettingRouter = require("./routes/luckyspinsetting");
 const SEORouter = require("./routes/seo");
 const PaymentGatewayRouter = require("./routes/paymentgateway");
@@ -76,7 +74,6 @@ const Withdraw = require("./models/withdraw.model");
 const { User } = require("./models/users.model");
 const { adminUser, adminLog } = require("./models/adminuser.model");
 const Mail = require("./models/mail.model");
-const email = require("./models/email.model");
 const { updateKioskBalance } = require("./services/kioskBalanceService");
 const kioskbalance = require("./models/kioskbalance.model");
 const UserWalletLog = require("./models/userwalletlog.model");
@@ -102,16 +99,8 @@ const xss = require("xss-clean");
 dotenv.config();
 
 const COMPANY_DBS = {
-  ae96: process.env.AE96_MONGODB_URI,
-  demo: process.env.DEMO_MONGODB_URI,
-  stash88: process.env.STASH88_MONGODB_URI,
-  oc7: process.env.OC7_MONGODB_URI,
-  ezwin9: process.env.EZWIN9_MONGODB_URI,
-  jinlihui: process.env.JINLIHUI_MONGODB_URI,
-  wantokplay: process.env.WANTOKPLAY_MONGODB_URI,
+  hkwin88: process.env.HKWIN88_MONGODB_URI,
   localhost: process.env.LOCALHOST_MONGODB_URI,
-  bm8my: process.env.BM8MY_MONGODB_URI,
-  bm8sg: process.env.BM8SG_MONGODB_URI,
 };
 
 const allowedOrigins = [
@@ -347,8 +336,6 @@ app.use(RebateScheduleRouter);
 app.use(AgentRouter);
 app.use(AgentLevelSystemRouter);
 app.use(CheckInRouter);
-app.use(smsRouter);
-app.use(emailRouter);
 app.use(LuckySpinSettingRouter);
 app.use(SEORouter);
 app.use(PaymentGatewayRouter);
