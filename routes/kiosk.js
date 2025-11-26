@@ -3,6 +3,7 @@ const router = express.Router();
 const Kiosk = require("../models/kiosk.model");
 const KioskCategory = require("../models/kioskcategory.model");
 const { authenticateAdminToken } = require("../auth/adminAuth");
+const { User } = require("../models/users.model");
 const { setConnForRequest } = require("../lib/dbContext");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
