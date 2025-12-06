@@ -104,8 +104,8 @@ const COMPANY_DBS = {
 };
 
 const allowedOrigins = [
-  "https://mysteryclub88.com",
-  "https://www.mysteryclub88.com",
+  "https://mysteryclub77.com",
+  "https://www.mysteryclub77.com",
   "capacitor://localhost",
   "ionic://localhost",
   "file://",
