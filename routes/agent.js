@@ -1532,23 +1532,21 @@ router.post(
   "/admin/api/transfer-referral",
   authenticateAdminToken,
   async (req, res) => {
-    const { username, newAgentUsername } = req.body;
-    if (!username || !newAgentUsername) {
+    const { userid, newAgentUserid } = req.body;
+    if (!userid || !newAgentUserid) {
       return res.status(200).json({
         success: false,
         message: {
-          en: "Username and new agent username are required",
-          zh: "用户名和新代理用户名是必需的",
-          zh_hk: "用戶名和新代理用戶名是必需的",
-          ms: "Nama pengguna dan nama pengguna ejen baru diperlukan",
-          id: "Username dan username agen baru diperlukan",
+          en: "User ID and new agent user ID are required",
+          zh: "用户ID和新代理用户ID是必需的",
+          zh_hk: "用戶ID和新代理用戶ID是必需的",
+          ms: "ID pengguna dan ID pengguna ejen baru diperlukan",
+          id: "User ID dan user ID agen baru diperlukan",
         },
       });
     }
     try {
-      const userToTransfer = await User.findOne({
-        username: username.toLowerCase(),
-      });
+      const userToTransfer = await User.findOne({ userid: userid });
       if (!userToTransfer) {
         return res.status(200).json({
           success: false,
@@ -1561,18 +1559,16 @@ router.post(
           },
         });
       }
-      const newReferrer = await User.findOne({
-        username: newAgentUsername.toLowerCase(),
-      });
+      const newReferrer = await User.findOne({ userid: newAgentUserid });
       if (!newReferrer) {
         return res.status(200).json({
           success: false,
           message: {
-            en: "New agent username not found",
-            zh: "新代理用户名未找到",
-            zh_hk: "新代理用戶名未找到",
-            ms: "Nama pengguna ejen baru tidak ditemui",
-            id: "Username agen baru tidak ditemukan",
+            en: "New agent user ID not found",
+            zh: "新代理用户ID未找到",
+            zh_hk: "新代理用戶ID未找到",
+            ms: "ID pengguna ejen baru tidak ditemui",
+            id: "User ID agen baru tidak ditemukan",
           },
         });
       }
@@ -1588,6 +1584,7 @@ router.post(
           },
         });
       }
+
       const oldReferrer = userToTransfer.referralBy
         ? userToTransfer.referralBy.username
         : null;
@@ -1606,6 +1603,7 @@ router.post(
         $push: {
           referrals: {
             user_id: userToTransfer._id,
+            userid: userToTransfer.userid,
             username: userToTransfer.username,
           },
         },
@@ -1615,6 +1613,7 @@ router.post(
         $set: {
           referralBy: {
             user_id: newReferrer._id,
+            userid: newReferrer.userid,
             username: newReferrer.username,
           },
         },
@@ -1631,8 +1630,10 @@ router.post(
         },
         data: {
           transferredUser: userToTransfer.username,
+          transferredUserid: userToTransfer.userid,
           oldReferrer: oldReferrer,
           newReferrer: newReferrer.username,
+          newReferrerUserid: newReferrer.userid,
         },
       });
     } catch (error) {

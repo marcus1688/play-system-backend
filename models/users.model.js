@@ -105,6 +105,11 @@ const dailyGameAmountsSchema = new mongoose.Schema(
 
 const userSchema = new mongoose.Schema(
   {
+    userid: {
+      type: Number,
+      unique: true,
+      sparse: true,
+    },
     gameId: String,
     evolutionUserId: Number,
     email: String,
@@ -167,12 +172,14 @@ const userSchema = new mongoose.Schema(
     referrals: [
       {
         user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        userid: { type: Number },
         username: { type: String },
         _id: false,
       },
     ],
     referralBy: {
       user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      userid: { type: Number },
       username: { type: String },
       _id: false,
     },
