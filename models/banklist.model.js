@@ -44,6 +44,10 @@ const banklistScehma = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    totalTransactionFees: {
+      type: Number,
+      default: 0,
+    },
     dailydepositamountlimit: {
       type: Number,
       default: 0,
