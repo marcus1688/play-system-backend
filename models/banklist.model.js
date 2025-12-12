@@ -44,6 +44,22 @@ const banklistScehma = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    dailydepositamountlimit: {
+      type: Number,
+      default: 0,
+    },
+    dailywithdrawamountlimit: {
+      type: Number,
+      default: 0,
+    },
+    monthlydepositamountlimit: {
+      type: Number,
+      default: 0,
+    },
+    monthlywithdrawamountlimit: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: {
