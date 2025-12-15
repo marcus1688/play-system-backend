@@ -9,6 +9,16 @@ const COMPANY_CONFIGS = {
       secretKey: process.env.HKWIN88_S3_SECRET_KEY,
     },
   },
+  megapng: {
+    id: "megapng",
+    name: "Megapng",
+    mongoUri: process.env.MEGAPNG_MONGODB_URI,
+    s3Config: {
+      bucket: process.env.MEGAPNG_S3_MAINBUCKET,
+      accessKey: process.env.MEGAPNG_S3_ACCESS_KEY,
+      secretKey: process.env.MEGAPNG_S3_SECRET_KEY,
+    },
+  },
   demo: {
     id: "demo",
     name: "Demo",

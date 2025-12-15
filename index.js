@@ -100,6 +100,7 @@ dotenv.config();
 
 const COMPANY_DBS = {
   hkwin88: process.env.HKWIN88_MONGODB_URI,
+  megapng: process.env.MEGAPNG_MONGODB_URI,
   localhost: process.env.LOCALHOST_MONGODB_URI,
 };
 
